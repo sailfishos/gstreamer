@@ -1,0 +1,87 @@
+From 609a75eae28c770372ef1464d1e03fadf03982ea Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tim-Philipp=20M=C3=BCller?= <tim.muller@collabora.co.uk>
+Date: Thu, 3 Feb 2011 10:53:27 +0000
+Subject: [PATCH] info: make adding/removing of gst_debug_log_default() work properly
+
+Make adding/removing gst_debug_log_default() work reliably in all
+circumstances. The problem was that depending on platform and linker
+flags the function argument might resolve to different addresses,
+which made it impossible to remove the default log function added
+in gst_init() from application code (because the pointer values
+didn't match). The new approach should keep things simple by passing
+NULL for the default function, which the code in libgstreamer can
+then handle.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=625396
+https://bugzilla.gnome.org/show_bug.cgi?id=640771
+---
+ gst/gstinfo.c |    9 +++++++--
+ gst/gstinfo.h |   15 +++++++++++++++
+ 2 files changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/gst/gstinfo.c b/gst/gstinfo.c
+index 78d4ce7..36fe1ac 100644
+--- a/gst/gstinfo.c
++++ b/gst/gstinfo.c
+@@ -90,6 +90,9 @@
+ #include "gst_private.h"
+ #include "gstinfo.h"
+ 
++#undef gst_debug_remove_log_function
++#undef gst_debug_add_log_function
++
+ #ifndef GST_DISABLE_GST_DEBUG
+ 
+ #ifdef HAVE_DLFCN_H
+@@ -1064,7 +1067,8 @@ gst_debug_add_log_function (GstLogFunction func, gpointer data)
+   LogFuncEntry *entry;
+   GSList *list;
+ 
+-  g_return_if_fail (func != NULL);
++  if (func == NULL)
++    func = gst_debug_log_default;
+ 
+   entry = g_slice_new (LogFuncEntry);
+   entry->func = func;
+@@ -1140,7 +1144,8 @@ gst_debug_remove_log_function (GstLogFunction func)
+ {
+   guint removals;
+ 
+-  g_return_val_if_fail (func != NULL, 0);
++  if (func == NULL)
++    func = gst_debug_log_default;
+ 
+   removals =
+       gst_debug_remove_with_compare_func
+diff --git a/gst/gstinfo.h b/gst/gstinfo.h
+index 7c2d86f..65f8435 100644
+--- a/gst/gstinfo.h
++++ b/gst/gstinfo.h
+@@ -337,9 +337,24 @@ G_CONST_RETURN gchar *
+ 
+ void            gst_debug_add_log_function            (GstLogFunction func,
+                                                        gpointer       data);
++
+ guint           gst_debug_remove_log_function         (GstLogFunction func);
+ guint           gst_debug_remove_log_function_by_data (gpointer       data);
+ 
++#define gst_debug_add_log_function(func,data) \
++G_STMT_START{                                 \
++  if (func == gst_debug_log_default) {        \
++    gst_debug_add_log_function(NULL,data);    \
++  } else {                                    \
++    gst_debug_add_log_function(func,data);    \
++  }                                           \
++}G_STMT_END
++
++#define gst_debug_remove_log_function(func)   \
++    (func == gst_debug_log_default) ?         \
++        gst_debug_remove_log_function(NULL) : \
++        gst_debug_remove_log_function(func)
++
+ void            gst_debug_set_active  (gboolean active);
+ gboolean        gst_debug_is_active   (void);
+ 
+-- 
+1.7.3.4
+

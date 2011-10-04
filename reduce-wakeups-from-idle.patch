@@ -1,0 +1,13 @@
+Index: gstreamer-0.10.28/tools/gst-launch.c
+===================================================================
+--- gstreamer-0.10.28.orig/tools/gst-launch.c
++++ gstreamer-0.10.28/tools/gst-launch.c
+@@ -398,7 +398,7 @@ event_loop (GstElement * pipeline, gbool
+   bus = gst_element_get_bus (GST_ELEMENT (pipeline));
+ 
+ #ifndef DISABLE_FAULT_HANDLER
+-  timeout_id = g_timeout_add (250, (GSourceFunc) check_intr, pipeline);
++  timeout_id = g_timeout_add_seconds (1, (GSourceFunc) check_intr, pipeline);
+ #endif
+ 
+   while (TRUE) {

@@ -1,0 +1,97 @@
+* Thu Sep 01 2011 Carsten Munk <carsten@maemo.org> - 0.10.32
+- Drop gtk-doc dependancy.
+
+* Wed May 11 2011 vivian zhang <vivian.zhang@intel.com> - 0.10.32
+- Merged patch to avoid lengthy parse when starting playing video (BMC #17294)
+
+* Fri Apr 15 2011 vivian zhang <vivian.zhang@intel.com> - 0.10.32
+- Added upstream patch to only set discont on the first buffer after drops (BMC #13958)
+
+* Wed Feb 9 2011 Teemu Tuominen <teemu.tuominen@cybercom.com> - 0.10.32
+- Added --with-buffer-alignment=pagesize configure option to fix BMC#13370
+
+* Thu Feb 3 2011 Teemu Tuominen <teemu.tuominen@cybercom.com> - 0.10.32
+- Added upstream patch to fix BMC#13232
+  (commit 609a75eae28c770372ef1464d1e03fadf03982ea)
+
+* Sat Jan 22 2011 Ling Yue <ling.yue@intel.com> - 0.10.32
+- Update to the latest upstream verion (FEA#10764)
+
+* Mon Jan 17 2011 Ling Yue <ling.yue@intel.com> - 0.10.32
+- Update to the latest upstream verion (0.10.31.4) (FEA#10764)
+
+* Thu Dec 02 2010 Topi Santakivi <topi.santakivi@digia.com> - 0.10.31
+- Update to the latest upstream version (FEA#10764)
+
+* Fri Oct 29 2010 Ling Yue <ling.yue@intel.com> - 0.10.30
+- Remove --disable-gst-debug to enable logging system during development.
+
+* Wed Oct 27 2010 Anas Nashif <anas.nashif@intel.com> - 0.10.30
+- Fixed build without introspection
+
+* Wed Oct 27 2010 Anas Nashif <anas.nashif@intel.com> - 0.10.30
+- Remove dependency on gobject-introspection
+
+* Fri Sep 03 2010 Ling Yue <ling.yue@intel.com> - 0.10.30
+- Fix gstreamer part of BMC#6520
+- Remove BR of : ogg, theora, vorbis
+- Subpackage: rename -doc to -devel-docs, add -tools
+- --enable-gtk-doc and put docs in devel-docs
+- Add more configure options to reduce image size and improve performance:  
+  --disable-gst-debug, --disable-loadsave, --disable-nls
+- Add CFLAGS="-DG_DISABLE_ASSERT -DG_DISABLE_CAST_CHECKS" as release
+  build doesn't need them
+- Remove --disable-check  and add libgstcheck related files to enable unit test
+  library build
+- Fix the mismatch in %file.
+
+* Thu Jul 29 2010 Ling Yue <ling.yue@intel.com> - 0.10.30
+- Upgrade to 0.10.30
+
+* Tue May 11 2010 Bin Gao <bin.gao@intel.com> 0.10.29
+- Update to 0.10.29
+
+* Thu Mar 18 2010 Damien Lespiau <damien.lespiau@intel.com> 0.10.28
+- Build introspection data
+- Tune the package name and origin to be Meego, not Moblin
+- Remove/update old configure options
+- Separate the -doc package from the -devel one
+- Package libgst*.so inside -devel
+- More accurate license
+
+* Sat Mar 13 2010 Rusty Lynch <rusty.lynch@intel.com> - 0.10.28
+- Update to 0.10.28, which required recreating the patch to 
+  reduce wakeups and dropping the gstbuffer patch
+
+* Mon Nov 30 2009 Bin Gao <bin.gao@intel.com> 0.10.25
+- Update to 0.10.25.
+
+* Fri Nov 13 2009 Bin Gao <bin.gao@intel.com> 0.10.24
+- Remove static declaration for function gst_subbuffer_get_type.
+  This is needed for libva support.
+
+* Sun Sep 27 2009 Bin Gao <bin.gao@intel.com> 0.10.24
+- Use g_timeout_add_seconds to reduce wakeups from idle
+
+* Fri Aug 28 2009 Vivian Zhang <vivian.zhang@intel.com> 0.10.24
+- Update to 0.10.24
+
+* Tue Jul 28 2009 Vivian Zhang <vivian.zhang@intel.com> 0.10.23
+- Update to 0.10.23
+
+* Sat Feb 14 2009 Vivian Zhang <vivian.zhang@intel.com> 0.10.22
+- Update to 0.10.22
+- Remove upstreamed patch 
+
+* Fri Dec 26 2008 Arjan van de Ven <arjan@linux.intel.com> 0.10.21
+- Fix configure for a 3 digit bison version
+
+* Tue Dec 16 2008 Anas Nashif <anas.nashif@intel.com> 0.10.21
+- Update spec file using latest spec-builder
+
+* Tue Dec 16 2008 Anas Nashif <anas.nashif@intel.com> 0.10.21
+- Update spec file using latest spec-builder
+
+* Thu Dec 08 2008 Rusty Lynch <rusty.lynch@intel.com> - 0.10.21-1
+- Creating a 0.10.21-1 release 
+
