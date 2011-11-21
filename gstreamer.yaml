@@ -1,6 +1,6 @@
 Name: gstreamer
 Summary: GStreamer streaming media framework runtime
-Version: 0.10.32
+Version: 0.10.35
 Release: 0
 Group: Applications/Multimedia
 License: LGPLv2+
@@ -9,9 +9,6 @@ Sources:
     - http://gstreamer.freedesktop.org/src/gstreamer/%{name}-%{version}.tar.bz2
 Patches:
     - reduce-wakeups-from-idle.patch
-    - 0001-info-make-adding-removing-of-gst_debug_log_default-w.patch
-    - 0002-valve-Only-set-discont-on-the-first-buffer-after-drops.patch
-    - donot-set-first-buffer-timestamp-to-zero.patch
 Description: |
     GStreamer is a streaming media framework, based on graphs of filters which
     operate on media data. Applications using this library can do anything
@@ -29,8 +26,8 @@ PkgConfigBR:
     - glib-2.0
     - libxml-2.0
 ConfigOptions:
-    - --with-package-name='Meego GStreamer package'
-    - --with-package-origin='http://www.meego.org'
+    - --with-package-name='Mer GStreamer package'
+    - --with-package-origin='http://www.merproject.org/'
     - --disable-dependency-tracking
     - --disable-examples
     - --disable-tests

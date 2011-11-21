@@ -1,3 +1,10 @@
+* Mon Nov 21 2011 Marko Saukko <marko.saukko@cybercom.com> - 0.10.35
+- Updated to latest version of 0.10 branch.
+- Removed merged patches:
+  - 0001-info-make-adding-removing-of-gst_debug_log_default-w.patch
+  - 0002-valve-Only-set-discont-on-the-first-buffer-after-drops.patch
+  - donot-set-first-buffer-timestamp-to-zero.patch
+
 * Thu Sep 01 2011 Carsten Munk <carsten@maemo.org> - 0.10.32
 - Drop gtk-doc dependancy.
 
