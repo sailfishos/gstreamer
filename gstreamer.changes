@@ -1,3 +1,6 @@
+* Mon Apr 30 2012 Marko Saukko <sage@merproject.org> - 0.10.36
+- Fixes MER#283: update gstreamer to 0.10.36
+
 * Mon Nov 21 2011 Marko Saukko <marko.saukko@cybercom.com> - 0.10.35
 - Updated to latest version of 0.10 branch.
 - Removed merged patches:

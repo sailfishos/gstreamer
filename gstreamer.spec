@@ -7,12 +7,12 @@
 
 Name:       gstreamer
 Summary:    GStreamer streaming media framework runtime
-Version:    0.10.35
+Version:    0.10.36
 Release:    0
 Group:      Applications/Multimedia
 License:    LGPLv2+
 URL:        http://gstreamer.freedesktop.org/
-Source0:    http://gstreamer.freedesktop.org/src/gstreamer/%{name}-%{version}.tar.bz2
+Source0:    http://gstreamer.freedesktop.org/src/gstreamer/%{name}-%{version}.tar.xz
 Source100:  gstreamer.yaml
 Patch0:     reduce-wakeups-from-idle.patch
 Requires(post): /sbin/ldconfig
