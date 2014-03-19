@@ -13,6 +13,7 @@ URL:		http://gstreamer.freedesktop.org/
 Source: 	http://gstreamer.freedesktop.org/src/gstreamer/%{name}-%{version}.tar.xz
 
 BuildRequires: 	pkgconfig(glib-2.0) >= %{_glib2}
+BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires: 	bison
 BuildRequires: 	flex
 BuildRequires: 	pkgconfig(check)
@@ -75,7 +76,7 @@ NOCONFIGURE=1 ./autogen.sh
   --with-package-name='Jolla GStreamer package' \
   --with-package-origin='http://jolla.com' \
   --enable-debug \
-  --enable-introspection=no \
+  --enable-introspection=yes \
   --disable-nls \
   --disable-examples \
   --enable-docbook=no \
@@ -116,6 +117,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgstnet-%{majorminor}.so.*
 %{_libdir}/gstreamer-%{majorminor}/libgstcoreelements.so
 %{_libexecdir}/gstreamer-%{majorminor}/gst-plugin-scanner
+%{_libdir}/girepository-1.0/Gst-1.0.typelib
+%{_libdir}/girepository-1.0/GstBase-1.0.typelib
+%{_libdir}/girepository-1.0/GstCheck-1.0.typelib
+%{_libdir}/girepository-1.0/GstController-1.0.typelib
+%{_libdir}/girepository-1.0/GstNet-1.0.typelib
 
 %files devel
 %defattr(-, root, root, -)
@@ -135,6 +141,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/gstreamer-controller-%{majorminor}.pc
 %{_libdir}/pkgconfig/gstreamer-check-%{majorminor}.pc
 %{_libdir}/pkgconfig/gstreamer-net-%{majorminor}.pc
+%{_datadir}/gir-1.0/Gst-1.0.gir
+%{_datadir}/gir-1.0/GstBase-1.0.gir
+%{_datadir}/gir-1.0/GstCheck-1.0.gir
+%{_datadir}/gir-1.0/GstController-1.0.gir
+%{_datadir}/gir-1.0/GstNet-1.0.gir
 
 %files tools
 %defattr(-, root, root, -)
