@@ -1,8 +1,7 @@
 %define		gstreamer	gstreamer
 %define		majorminor	1.0
-%define         _glib2          2.32.0
 
-Name: 		%{gstreamer}1.0
+Name: 		%{gstreamer}%{majorminor}
 Version: 	1.2.0
 Release: 	1
 Summary: 	GStreamer streaming media framework runtime
@@ -12,7 +11,7 @@ License: 	LGPL
 URL:		http://gstreamer.freedesktop.org/
 Source: 	http://gstreamer.freedesktop.org/src/gstreamer/%{name}-%{version}.tar.xz
 
-BuildRequires: 	pkgconfig(glib-2.0) >= %{_glib2}
+BuildRequires: 	pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires: 	bison
 BuildRequires: 	flex
@@ -36,7 +35,7 @@ Summary: 	Libraries/include files for GStreamer streaming media framework
 Group: 		Development/Libraries
 
 Requires: 	%{name} = %{version}-%{release}
-Requires: 	glib2-devel >= %{_glib2}
+Requires: 	glib2-devel
 Requires:	check-devel
 
 %description devel
@@ -73,7 +72,7 @@ This package contains some GStreamer useful tools
 %build
 NOCONFIGURE=1 ./autogen.sh
 %configure \
-  --with-package-name='Jolla GStreamer package' \
+  --with-package-name='SailfishOS GStreamer package' \
   --with-package-origin='http://jolla.com' \
   --enable-debug \
   --enable-introspection=yes \
