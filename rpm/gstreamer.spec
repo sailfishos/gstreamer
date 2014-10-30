@@ -17,7 +17,7 @@ BuildRequires: 	bison
 BuildRequires: 	flex
 BuildRequires: 	pkgconfig(check)
 BuildRequires:  python
-BuildRequires:  autoconf213
+BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
 BuildRequires:  gettext-devel
