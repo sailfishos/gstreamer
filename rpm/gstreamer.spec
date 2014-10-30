@@ -98,9 +98,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -fr $RPM_BUILD_ROOT%{_datadir}/gtk-doc
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+rm -fr $RPM_BUILD_ROOT/%{_mandir}
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -151,6 +149,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/gst-inspect-%{majorminor}
 %{_bindir}/gst-launch-%{majorminor}
 %{_bindir}/gst-typefind-%{majorminor}
-%{_mandir}/man1/gst-inspect-%{majorminor}.*
-%{_mandir}/man1/gst-launch-%{majorminor}.*
-%{_mandir}/man1/gst-typefind-%{majorminor}.*
