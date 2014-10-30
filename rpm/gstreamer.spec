@@ -10,7 +10,7 @@ Group: 		Applications/Multimedia
 License: 	LGPL
 URL:		http://gstreamer.freedesktop.org/
 Source: 	http://gstreamer.freedesktop.org/src/gstreamer/%{name}-%{version}.tar.xz
-
+Source1:        gstreamer1.0.conf
 BuildRequires: 	pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires: 	bison
@@ -90,6 +90,7 @@ make %{?_smp_mflags}
 %install
 rm -rf $RPM_BUILD_ROOT
 %make_install
+install -m 644 -D %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
 
 # Clean out files that should not be part of the rpm.
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/cache/gstreamer-%{majorminor}
@@ -149,3 +150,4 @@ rm -fr $RPM_BUILD_ROOT/%{_mandir}
 %{_bindir}/gst-inspect-%{majorminor}
 %{_bindir}/gst-launch-%{majorminor}
 %{_bindir}/gst-typefind-%{majorminor}
+%{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
