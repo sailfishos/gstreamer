@@ -2,7 +2,7 @@
 %define		majorminor	1.0
 
 Name: 		%{gstreamer}%{majorminor}
-Version: 	1.4.3
+Version: 	1.4.4
 Release: 	1
 Summary: 	GStreamer streaming media framework runtime
 
