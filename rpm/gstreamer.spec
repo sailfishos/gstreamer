@@ -21,6 +21,8 @@ BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
 BuildRequires:  gettext-devel
+Obsoletes: gst-av
+Obsoletes: gstreamer0.10-ffmpeg
 
 %description
 GStreamer is a streaming media framework, based on graphs of filters which
