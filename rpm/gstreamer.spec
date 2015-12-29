@@ -1,28 +1,27 @@
-%define		gstreamer	gstreamer
-%define		majorminor	1.0
+%define    gstreamer  gstreamer
+%define    majorminor  1.0
 
-Name: 		%{gstreamer}%{majorminor}
-Version: 	1.4.5
-Release: 	1
-Summary: 	GStreamer streaming media framework runtime
-
-Group: 		Applications/Multimedia
-License: 	LGPL
-URL:		http://gstreamer.freedesktop.org/
-Source: 	http://gstreamer.freedesktop.org/src/gstreamer/%{name}-%{version}.tar.xz
-Source1:        gstreamer1.0.conf
-BuildRequires: 	pkgconfig(glib-2.0)
-BuildRequires:  pkgconfig(gobject-introspection-1.0)
-BuildRequires: 	bison
-BuildRequires: 	flex
-BuildRequires: 	pkgconfig(check)
-BuildRequires:  python
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  libtool
-BuildRequires:  gettext-devel
-Obsoletes: gst-av
-Obsoletes: gstreamer0.10-ffmpeg
+Name:          %{gstreamer}%{majorminor}
+Version:       1.4.5
+Release:       1
+Summary:       GStreamer streaming media framework runtime
+Group:         Applications/Multimedia
+License:       LGPLv2+
+URL:           http://gstreamer.freedesktop.org/
+Source:        %{name}-%{version}.tar.gz
+Source1:       gstreamer1.0.conf
+BuildRequires: pkgconfig(glib-2.0)
+BuildRequires: pkgconfig(gobject-introspection-1.0)
+BuildRequires: bison
+BuildRequires: flex
+BuildRequires: pkgconfig(check)
+BuildRequires: python
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libtool
+BuildRequires: gettext-devel
+Obsoletes:     gst-av
+Obsoletes:     gstreamer0.10-ffmpeg
 
 %description
 GStreamer is a streaming media framework, based on graphs of filters which
@@ -33,12 +32,10 @@ types or processing capabilities can be added simply by installing new
 plugins.
 
 %package devel
-Summary: 	Libraries/include files for GStreamer streaming media framework
-Group: 		Development/Libraries
-
-Requires: 	%{name} = %{version}-%{release}
-Requires: 	glib2-devel
-Requires:	check-devel
+Summary:  Libraries/include files for GStreamer streaming media framework
+Requires: %{name} = %{version}-%{release}
+Requires: glib2-devel
+Requires: check-devel
 
 %description devel
 GStreamer is a streaming media framework, based on graphs of filters which
@@ -53,10 +50,8 @@ applications and plugins for GStreamer, as well as general and API
 documentation.
 
 %package tools
-Summary: 	Tools for GStreamer streaming media framework
-Group: 		Applications/Multimedia
-
-Requires: 	%{name} = %{version}-%{release}
+Summary:  Tools for GStreamer streaming media framework
+Requires: %{name} = %{version}-%{release}
 
 %description tools
 GStreamer is a streaming media framework, based on graphs of filters which
