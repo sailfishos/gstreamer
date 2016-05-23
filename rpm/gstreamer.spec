@@ -79,8 +79,8 @@ NOCONFIGURE=1 ./autogen.sh
   --enable-gtk-doc=no \
   --enable-gtk-doc-html=no \
   --enable-gtk-doc-pdf=no \
-  --disable-trace \
-  --disable-alloc-trace
+  --enable-trace \
+  --enable-alloc-trace
 
 make %{?_smp_mflags}
 
