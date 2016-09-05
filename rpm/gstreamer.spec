@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.4.5
+Version:       1.8.3
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 Group:         Applications/Multimedia
@@ -97,6 +97,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -fr $RPM_BUILD_ROOT%{_datadir}/gtk-doc
 rm -fr $RPM_BUILD_ROOT/%{_mandir}
+rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -111,7 +112,9 @@ rm -fr $RPM_BUILD_ROOT/%{_mandir}
 %{_libdir}/libgstcontroller-%{majorminor}.so.*
 %{_libdir}/libgstnet-%{majorminor}.so.*
 %{_libdir}/gstreamer-%{majorminor}/libgstcoreelements.so
+%{_libdir}/gstreamer-%{majorminor}/libgstcoretracers.so
 %{_libexecdir}/gstreamer-%{majorminor}/gst-plugin-scanner
+%{_libexecdir}/gstreamer-%{majorminor}/gst-ptp-helper
 %{_libdir}/girepository-1.0/Gst-1.0.typelib
 %{_libdir}/girepository-1.0/GstBase-1.0.typelib
 %{_libdir}/girepository-1.0/GstCheck-1.0.typelib
@@ -125,6 +128,7 @@ rm -fr $RPM_BUILD_ROOT/%{_mandir}
 %{_includedir}/gstreamer-%{majorminor}/gst/check
 %{_includedir}/gstreamer-%{majorminor}/gst/controller
 %{_includedir}/gstreamer-%{majorminor}/gst/net
+%{_libdir}/gstreamer-%{majorminor}/include/gst/gstconfig.h
 %{_libdir}/libgstreamer-%{majorminor}.so
 %{_libdir}/libgstbase-%{majorminor}.so
 %{_libdir}/libgstcheck-%{majorminor}.so*
@@ -147,4 +151,5 @@ rm -fr $RPM_BUILD_ROOT/%{_mandir}
 %{_bindir}/gst-inspect-%{majorminor}
 %{_bindir}/gst-launch-%{majorminor}
 %{_bindir}/gst-typefind-%{majorminor}
+%{_bindir}/gst-stats-%{majorminor}
 %{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
