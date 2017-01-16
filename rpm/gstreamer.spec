@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.8.3
+Version:       1.10.2
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 Group:         Applications/Multimedia
@@ -11,7 +11,6 @@ URL:           http://gstreamer.freedesktop.org/
 Source:        %{name}-%{version}.tar.gz
 Source1:       gstreamer1.0.conf
 BuildRequires: pkgconfig(glib-2.0)
-BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: bison
 BuildRequires: flex
 BuildRequires: pkgconfig(check)
@@ -72,7 +71,7 @@ NOCONFIGURE=1 ./autogen.sh
   --with-package-name='SailfishOS GStreamer package' \
   --with-package-origin='http://jolla.com' \
   --enable-debug \
-  --enable-introspection=yes \
+  --disable-introspection \
   --disable-nls \
   --disable-examples \
   --enable-docbook=no \
@@ -115,11 +114,6 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
 %{_libdir}/gstreamer-%{majorminor}/libgstcoretracers.so
 %{_libexecdir}/gstreamer-%{majorminor}/gst-plugin-scanner
 %{_libexecdir}/gstreamer-%{majorminor}/gst-ptp-helper
-%{_libdir}/girepository-1.0/Gst-1.0.typelib
-%{_libdir}/girepository-1.0/GstBase-1.0.typelib
-%{_libdir}/girepository-1.0/GstCheck-1.0.typelib
-%{_libdir}/girepository-1.0/GstController-1.0.typelib
-%{_libdir}/girepository-1.0/GstNet-1.0.typelib
 
 %files devel
 %defattr(-, root, root, -)
@@ -128,7 +122,6 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
 %{_includedir}/gstreamer-%{majorminor}/gst/check
 %{_includedir}/gstreamer-%{majorminor}/gst/controller
 %{_includedir}/gstreamer-%{majorminor}/gst/net
-%{_libdir}/gstreamer-%{majorminor}/include/gst/gstconfig.h
 %{_libdir}/libgstreamer-%{majorminor}.so
 %{_libdir}/libgstbase-%{majorminor}.so
 %{_libdir}/libgstcheck-%{majorminor}.so*
@@ -140,11 +133,6 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
 %{_libdir}/pkgconfig/gstreamer-controller-%{majorminor}.pc
 %{_libdir}/pkgconfig/gstreamer-check-%{majorminor}.pc
 %{_libdir}/pkgconfig/gstreamer-net-%{majorminor}.pc
-%{_datadir}/gir-1.0/Gst-1.0.gir
-%{_datadir}/gir-1.0/GstBase-1.0.gir
-%{_datadir}/gir-1.0/GstCheck-1.0.gir
-%{_datadir}/gir-1.0/GstController-1.0.gir
-%{_datadir}/gir-1.0/GstNet-1.0.gir
 
 %files tools
 %defattr(-, root, root, -)
