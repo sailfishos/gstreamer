@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.10.4
+Version:       1.12.4
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 Group:         Applications/Multimedia
@@ -151,4 +151,5 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
 %{_bindir}/gst-launch-%{majorminor}
 %{_bindir}/gst-typefind-%{majorminor}
 %{_bindir}/gst-stats-%{majorminor}
+%{_libexecdir}/gstreamer-%{majorminor}/gst-completion-helper
 %{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
