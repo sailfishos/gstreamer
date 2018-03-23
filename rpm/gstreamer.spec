@@ -22,6 +22,7 @@ BuildRequires: libtool
 BuildRequires: gettext-devel
 Obsoletes:     gst-av
 Obsoletes:     gstreamer0.10-ffmpeg
+Patch1:        deactivate_max_size_time.patch
 
 %description
 GStreamer is a streaming media framework, based on graphs of filters which
@@ -65,6 +66,7 @@ This package contains some GStreamer useful tools
 
 %prep
 %setup -q -n %{name}-%{version}/gstreamer
+%patch1 -p1
 
 %build
 NOCONFIGURE=1 ./autogen.sh
