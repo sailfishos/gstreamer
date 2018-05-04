@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.10.4
+Version:       1.14.0
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 Group:         Applications/Multimedia
@@ -16,8 +16,7 @@ BuildRequires: bison
 BuildRequires: flex
 BuildRequires: pkgconfig(check)
 BuildRequires: python
-BuildRequires: autoconf
-BuildRequires: automake
+BuildRequires:  meson
 BuildRequires: libtool
 BuildRequires: gettext-devel
 Obsoletes:     gst-av
@@ -69,26 +68,18 @@ This package contains some GStreamer useful tools
 %patch1 -p1
 
 %build
-NOCONFIGURE=1 ./autogen.sh
-%configure \
-  --with-package-name='SailfishOS GStreamer package' \
-  --with-package-origin='http://jolla.com' \
-  --enable-debug \
-  --enable-introspection=yes \
-  --disable-nls \
-  --disable-examples \
-  --enable-docbook=no \
-  --enable-gtk-doc=no \
-  --enable-gtk-doc-html=no \
-  --enable-gtk-doc-pdf=no \
-  --enable-trace \
-  --enable-alloc-trace
+%meson \
+  -Dwith-package-name='SailfishOS GStreamer package' \
+  -Dwith-package-origin='http://sailfishos.org/' \
+  -Ddisable_libunwind=true \
+  -Ddisable_examples=true \
+  -Ddisable_gtkdoc=true
 
-make %{?_smp_mflags}
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%make_install
+%meson_install
 install -m 644 -D %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
 
 # Clean out files that should not be part of the rpm.
@@ -97,9 +88,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
-rm -fr $RPM_BUILD_ROOT%{_datadir}/gtk-doc
 rm -fr $RPM_BUILD_ROOT/%{_mandir}
 rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
+rm -fr $RPM_BUILD_ROOT/%{_datadir}/locale
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig

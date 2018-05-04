@@ -1,6 +1,6 @@
 --- a/plugins/elements/gstqueue2.c	2018-03-23 14:33:51.033985808 +0100
 +++ b/plugins/elements/gstqueue2.c	2018-03-23 14:34:37.526074183 +0100
-@@ -111,7 +111,7 @@
+@@ -108,7 +108,7 @@
  /* default property values */
  #define DEFAULT_MAX_SIZE_BUFFERS   100  /* 100 buffers */
  #define DEFAULT_MAX_SIZE_BYTES     (2 * 1024 * 1024)    /* 2 MB */
