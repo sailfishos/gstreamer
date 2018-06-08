@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.10.4
+Version:       1.14.1
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 Group:         Applications/Multimedia
@@ -100,6 +100,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -fr $RPM_BUILD_ROOT%{_datadir}/gtk-doc
 rm -fr $RPM_BUILD_ROOT/%{_mandir}
 rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
+rm -f $RPM_BUILD_ROOT/%{_libexecdir}/gstreamer-%{majorminor}/gst-completion-helper
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
