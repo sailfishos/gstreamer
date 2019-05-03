@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.14.1
+Version:       1.16.1
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 Group:         Applications/Multimedia
@@ -15,9 +15,9 @@ BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: bison
 BuildRequires: flex
 BuildRequires: pkgconfig(check)
+BuildRequires: pkgconfig(libdw)
 BuildRequires: python
-BuildRequires: autoconf
-BuildRequires: automake
+BuildRequires: meson
 BuildRequires: libtool
 BuildRequires: gettext-devel
 Obsoletes:     gst-av
@@ -69,26 +69,24 @@ This package contains some GStreamer useful tools
 %patch1 -p1
 
 %build
-NOCONFIGURE=1 ./autogen.sh
-%configure \
-  --with-package-name='SailfishOS GStreamer package' \
-  --with-package-origin='http://jolla.com' \
-  --enable-debug \
-  --enable-introspection=yes \
-  --disable-nls \
-  --disable-examples \
-  --enable-docbook=no \
-  --enable-gtk-doc=no \
-  --enable-gtk-doc-html=no \
-  --enable-gtk-doc-pdf=no \
-  --enable-trace \
-  --enable-alloc-trace
+%meson \
+  -Dpackage-name='SailfishOS GStreamer package' \
+  -Dpackage-origin='http://sailfishos.org/' \
+  -Dgst_debug=true \
+  -Dintrospection=enabled \
+  -Dnls=disabled \
+  -Dexamples=disabled \
+  -Dgtk_doc=disabled \
+  -Dbash-completion=disabled \
+  -Dtracer_hooks=true \
+  -Dlibunwind=disabled \
+  -Ddbghelp=disabled
 
-make %{?_smp_mflags}
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%make_install
+%meson_install
 install -m 644 -D %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
 
 # Clean out files that should not be part of the rpm.
@@ -100,8 +98,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -fr $RPM_BUILD_ROOT%{_datadir}/gtk-doc
 rm -fr $RPM_BUILD_ROOT/%{_mandir}
-rm -fr $RPM_BUILD_ROOT/%{_datadir}/bash-completion/
-rm -f $RPM_BUILD_ROOT/%{_libexecdir}/gstreamer-%{majorminor}/gst-completion-helper
+rm -fr $RPM_BUILD_ROOT/%{_datadir}/glib-2.0/gdb
+rm -fr $RPM_BUILD_ROOT/%{_datadir}/gstreamer-%{majorminor}/gdb
+rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
