@@ -93,6 +93,7 @@ install -m 644 -D %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/pulse/xpolicy.conf.d/g
 
 # Clean out files that should not be part of the rpm.
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/cache/gstreamer-%{majorminor}
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/gstreamer-%{majorminor}
 rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
@@ -110,6 +111,10 @@ rm -f $RPM_BUILD_ROOT/%{_libexecdir}/gstreamer-%{majorminor}/gst-completion-help
 
 %files
 %defattr(-, root, root, -)
+%license COPYING
+%dir %{_libdir}/gstreamer-%{majorminor}
+%dir %{_libexecdir}/gstreamer-%{majorminor}
+%dir %{_datadir}/gstreamer-%{majorminor}
 %{_libdir}/libgstreamer-%{majorminor}.so.*
 %{_libdir}/libgstbase-%{majorminor}.so.*
 %{_libdir}/libgstcontroller-%{majorminor}.so.*
