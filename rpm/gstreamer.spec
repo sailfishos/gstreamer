@@ -20,6 +20,7 @@ BuildRequires: python
 BuildRequires: meson
 BuildRequires: libtool
 BuildRequires: gettext-devel
+Requires:     %{name}-lang = %{version}
 Obsoletes:     gst-av
 Obsoletes:     gstreamer0.10-ffmpeg
 Patch1:        deactivate_max_size_time.patch
@@ -64,6 +65,19 @@ plugins.
 
 This package contains some GStreamer useful tools
 
+%package lang
+Summary:  Translations for GStreamer streaming media framework
+
+%description lang
+GStreamer is a streaming media framework, based on graphs of filters which
+operate on media data. Applications using this library can do anything
+from real-time sound processing to playing videos, and just about anything
+else media-related.  Its plugin-based architecture means that new data
+types or processing capabilities can be added simply by installing new
+plugins.
+
+NLS translation files for GStreamer streaming media framework
+
 %prep
 %setup -q -n %{name}-%{version}/gstreamer
 %patch1 -p1
@@ -74,7 +88,7 @@ This package contains some GStreamer useful tools
   -Dpackage-origin='http://sailfishos.org/' \
   -Dgst_debug=true \
   -Dintrospection=enabled \
-  -Dnls=disabled \
+  -Dnls=enabled \
   -Dexamples=disabled \
   -Dgtk_doc=disabled \
   -Dbash-completion=disabled \
@@ -87,6 +101,7 @@ This package contains some GStreamer useful tools
 %install
 rm -rf $RPM_BUILD_ROOT
 %meson_install
+%find_lang gstreamer-%{majorminor}
 install -m 644 -D %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
 
 # Clean out files that should not be part of the rpm.
@@ -127,6 +142,8 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_libdir}/girepository-1.0/GstCheck-1.0.typelib
 %{_libdir}/girepository-1.0/GstController-1.0.typelib
 %{_libdir}/girepository-1.0/GstNet-1.0.typelib
+
+%files lang -f gstreamer-%{majorminor}.lang
 
 %files devel
 %defattr(-, root, root, -)
