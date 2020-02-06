@@ -16,7 +16,6 @@ BuildRequires: bison
 BuildRequires: flex
 BuildRequires: pkgconfig(check)
 BuildRequires: pkgconfig(libdw)
-BuildRequires: python
 BuildRequires: meson
 BuildRequires: libtool
 BuildRequires: gettext-devel
