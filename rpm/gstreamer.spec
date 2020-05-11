@@ -2,10 +2,9 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.16.1
+Version:       1.16.2
 Release:       1
 Summary:       GStreamer streaming media framework runtime
-Group:         Applications/Multimedia
 License:       LGPLv2+
 URL:           http://gstreamer.freedesktop.org/
 Source:        %{name}-%{version}.tar.gz
