@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.16.2
+Version:       1.18.1
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 License:       LGPLv2+
@@ -63,8 +63,7 @@ plugins.
 This package contains some GStreamer useful tools
 
 %prep
-%setup -q -n %{name}-%{version}/gstreamer
-%patch1 -p1
+%autosetup -p1 -n %{name}-%{version}/gstreamer
 
 %build
 %meson \
@@ -75,6 +74,7 @@ This package contains some GStreamer useful tools
   -Dnls=disabled \
   -Dexamples=disabled \
   -Dgtk_doc=disabled \
+  -Ddoc=disabled \
   -Dbash-completion=disabled \
   -Dtracer_hooks=true \
   -Dlibunwind=disabled \
@@ -94,8 +94,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
-rm -fr $RPM_BUILD_ROOT%{_datadir}/gtk-doc
+# Remove docs
 rm -fr $RPM_BUILD_ROOT/%{_mandir}
+rm -f $RPM_BUILD_ROOT/%{_libexecdir}/gstreamer-%{majorminor}/gst-hotdoc-plugins-scanner
+rm -f $RPM_BUILD_ROOT/%{_libexecdir}/gstreamer-%{majorminor}/gst-plugins-doc-cache-generator
+# Remove GDB
 rm -fr $RPM_BUILD_ROOT/%{_datadir}/glib-2.0/gdb
 rm -fr $RPM_BUILD_ROOT/%{_datadir}/gstreamer-%{majorminor}/gdb
 rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
@@ -156,4 +159,5 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_bindir}/gst-launch-%{majorminor}
 %{_bindir}/gst-typefind-%{majorminor}
 %{_bindir}/gst-stats-%{majorminor}
+%{_bindir}/gst-tester-%{majorminor}
 %{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
