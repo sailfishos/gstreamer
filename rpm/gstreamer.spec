@@ -2,7 +2,7 @@
 %define    majorminor  1.0
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.18.4
+Version:       1.18.5
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 License:       LGPLv2+
