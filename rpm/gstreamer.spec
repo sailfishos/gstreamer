@@ -18,8 +18,6 @@ BuildRequires: pkgconfig(libdw)
 BuildRequires: meson
 BuildRequires: libtool
 BuildRequires: gettext-devel
-Obsoletes:     gst-av
-Obsoletes:     gstreamer0.10-ffmpeg
 Patch1:        deactivate_max_size_time.patch
 
 %description
@@ -30,9 +28,17 @@ else media-related.  Its plugin-based architecture means that new data
 types or processing capabilities can be added simply by installing new
 plugins.
 
+%package libgstcheck
+Summary: GStreamer unit test library
+Requires: %{name} = %{version}-%{release}
+
+%description libgstcheck
+%{summary}.
+
 %package devel
 Summary:  Libraries/include files for GStreamer streaming media framework
 Requires: %{name} = %{version}-%{release}
+Requires: %{name}-libgstcheck = %{version}-%{release}
 Requires: glib2-devel
 Requires: check-devel
 
@@ -129,6 +135,10 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_libdir}/girepository-1.0/GstController-1.0.typelib
 %{_libdir}/girepository-1.0/GstNet-1.0.typelib
 
+%files libgstcheck
+%defattr(-, root, root, -)
+%{_libdir}/libgstcheck-%{majorminor}.so.*
+
 %files devel
 %defattr(-, root, root, -)
 %{_includedir}/gstreamer-%{majorminor}/gst/*.h
@@ -138,7 +148,7 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_includedir}/gstreamer-%{majorminor}/gst/net
 %{_libdir}/libgstreamer-%{majorminor}.so
 %{_libdir}/libgstbase-%{majorminor}.so
-%{_libdir}/libgstcheck-%{majorminor}.so*
+%{_libdir}/libgstcheck-%{majorminor}.so
 %{_libdir}/libgstcontroller-%{majorminor}.so
 %{_libdir}/libgstnet-%{majorminor}.so
 %{_datadir}/aclocal/gst-element-check-%{majorminor}.m4
