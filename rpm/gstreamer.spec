@@ -1,8 +1,11 @@
 %define    gstreamer  gstreamer
 %define    majorminor  1.0
 
+%global _vpath_srcdir subprojects/gstreamer
+%global _vpath_builddir subprojects/gstreamer/_build
+
 Name:          %{gstreamer}%{majorminor}
-Version:       1.18.5
+Version:       1.20.3
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 License:       LGPLv2+
@@ -79,7 +82,6 @@ This package contains some GStreamer useful tools
   -Dintrospection=enabled \
   -Dnls=disabled \
   -Dexamples=disabled \
-  -Dgtk_doc=disabled \
   -Ddoc=disabled \
   -Dbash-completion=disabled \
   -Dtracer_hooks=true \
@@ -117,7 +119,7 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 
 %files
 %defattr(-, root, root, -)
-%license COPYING
+%license subprojects/gstreamer/COPYING
 %dir %{_libdir}/gstreamer-%{majorminor}
 %dir %{_libexecdir}/gstreamer-%{majorminor}
 %dir %{_datadir}/gstreamer-%{majorminor}
