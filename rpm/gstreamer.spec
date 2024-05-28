@@ -5,7 +5,7 @@
 %global _vpath_builddir subprojects/gstreamer/_build
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.22.10
+Version:       1.24.3
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 License:       LGPLv2+
@@ -19,6 +19,7 @@ BuildRequires: flex
 BuildRequires: pkgconfig(check)
 BuildRequires: pkgconfig(libdw)
 BuildRequires: meson
+BuildRequires: rust
 BuildRequires: libtool
 BuildRequires: gettext-devel
 Patch1:        deactivate_max_size_time.patch
@@ -75,6 +76,27 @@ This package contains some GStreamer useful tools
 %autosetup -p1 -n %{name}-%{version}/gstreamer
 
 %build
+
+# When cross-compiling under SB2 rust needs to know what arch to emit
+# when nothing is specified on the command line. That usually defaults
+# to "whatever rust was built as" but in SB2 rust is accelerated and
+# would produce x86 so this is how it knows differently. Not needed
+# for native x86 builds
+%ifarch %arm
+export SB2_RUST_TARGET_TRIPLE=armv7-unknown-linux-gnueabihf
+%endif
+%ifarch aarch64
+export SB2_RUST_TARGET_TRIPLE=aarch64-unknown-linux-gnu
+%endif
+# This avoids a malloc hang in sb2 gated calls to execvp/dup2/chdir
+# during fork/exec. It has no effect outside sb2 so doesn't hurt
+# native builds.
+%ifnarch %{ix86}
+export SB2_RUST_EXECVP_SHIM="/usr/bin/env LD_PRELOAD=/usr/lib/libsb2/libsb2.so.1 /usr/bin/env"
+export SB2_RUST_USE_REAL_EXECVP=Yes
+export SB2_RUST_USE_REAL_FN=Yes
+%endif
+
 %meson \
   -Dpackage-name='SailfishOS GStreamer package' \
   -Dpackage-origin='http://sailfishos.org/' \
@@ -118,7 +140,6 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %postun devel -p /sbin/ldconfig
 
 %files
-%defattr(-, root, root, -)
 %license subprojects/gstreamer/COPYING
 %dir %{_libdir}/gstreamer-%{majorminor}
 %dir %{_libexecdir}/gstreamer-%{majorminor}
@@ -129,6 +150,7 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_libdir}/libgstnet-%{majorminor}.so.*
 %{_libdir}/gstreamer-%{majorminor}/libgstcoreelements.so
 %{_libdir}/gstreamer-%{majorminor}/libgstcoretracers.so
+%{_libexecdir}/gstreamer-%{majorminor}/gst-completion-helper
 %{_libexecdir}/gstreamer-%{majorminor}/gst-plugin-scanner
 %{_libexecdir}/gstreamer-%{majorminor}/gst-ptp-helper
 %{_libdir}/girepository-1.0/Gst-1.0.typelib
@@ -138,11 +160,9 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_libdir}/girepository-1.0/GstNet-1.0.typelib
 
 %files libgstcheck
-%defattr(-, root, root, -)
 %{_libdir}/libgstcheck-%{majorminor}.so.*
 
 %files devel
-%defattr(-, root, root, -)
 %{_includedir}/gstreamer-%{majorminor}/gst/*.h
 %{_includedir}/gstreamer-%{majorminor}/gst/base
 %{_includedir}/gstreamer-%{majorminor}/gst/check
@@ -166,7 +186,6 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_datadir}/gir-1.0/GstNet-1.0.gir
 
 %files tools
-%defattr(-, root, root, -)
 %{_bindir}/gst-inspect-%{majorminor}
 %{_bindir}/gst-launch-%{majorminor}
 %{_bindir}/gst-typefind-%{majorminor}
