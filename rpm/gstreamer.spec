@@ -5,7 +5,7 @@
 %global _vpath_builddir subprojects/gstreamer/_build
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.24.3
+Version:       1.24.6
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 License:       LGPLv2+
