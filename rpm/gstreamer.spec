@@ -5,7 +5,7 @@
 %global _vpath_builddir subprojects/gstreamer/_build
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.24.6
+Version:       1.24.10
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 License:       LGPLv2+
@@ -113,7 +113,6 @@ export SB2_RUST_USE_REAL_FN=Yes
 %meson_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %meson_install
 install -m 644 -D %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/pulse/xpolicy.conf.d/gstreamer1.0.conf
 
