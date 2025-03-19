@@ -151,7 +151,7 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_libdir}/gstreamer-%{majorminor}/libgstcoretracers.so
 %{_libexecdir}/gstreamer-%{majorminor}/gst-completion-helper
 %{_libexecdir}/gstreamer-%{majorminor}/gst-plugin-scanner
-%{_libexecdir}/gstreamer-%{majorminor}/gst-ptp-helper
+%attr(4755,root,root) %{_libexecdir}/gstreamer-%{majorminor}/gst-ptp-helper
 %{_libdir}/girepository-1.0/Gst-1.0.typelib
 %{_libdir}/girepository-1.0/GstBase-1.0.typelib
 %{_libdir}/girepository-1.0/GstCheck-1.0.typelib
