@@ -5,11 +5,11 @@
 %global _vpath_builddir subprojects/gstreamer/_build
 
 Name:          %{gstreamer}%{majorminor}
-Version:       1.24.10
+Version:       1.26.2
 Release:       1
 Summary:       GStreamer streaming media framework runtime
 License:       LGPLv2+
-URL:           http://gstreamer.freedesktop.org/
+URL:           https://github.com/sailfishos/gstreamer
 Source:        %{name}-%{version}.tar.gz
 Source1:       gstreamer1.0.conf
 BuildRequires: pkgconfig(glib-2.0)
@@ -20,6 +20,7 @@ BuildRequires: pkgconfig(check)
 BuildRequires: pkgconfig(libdw)
 BuildRequires: meson
 BuildRequires: rust
+BuildRequires: libatomic
 BuildRequires: libtool
 BuildRequires: gettext-devel
 Patch1:        deactivate_max_size_time.patch
@@ -173,6 +174,7 @@ rm -fr $RPM_BUILD_ROOT/%{_datadir}/gdb
 %{_libdir}/libgstcontroller-%{majorminor}.so
 %{_libdir}/libgstnet-%{majorminor}.so
 %{_datadir}/aclocal/gst-element-check-%{majorminor}.m4
+%{_datadir}/cmake/*.cmake
 %{_libdir}/pkgconfig/gstreamer-%{majorminor}.pc
 %{_libdir}/pkgconfig/gstreamer-base-%{majorminor}.pc
 %{_libdir}/pkgconfig/gstreamer-controller-%{majorminor}.pc
